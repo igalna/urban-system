@@ -37,21 +37,21 @@ public class DoublyLinkedListImpl implements DoublyLinkedList {
 		
 		this.endNode = newEndNode;
 		lengthOfList++;
-
 	}
 
 	@Override
 	public void removeNodeFromList(Integer indexOfIntegerToBeRemoved) {
 		
 		if (indexOfIntegerToBeRemoved == 0) {
-			System.out.println(indexOfIntegerToBeRemoved);
 			startNode.getNextNode().setPreviousNode(endNode);
 			endNode.setNextNode(startNode.getNextNode());
+			startNode = startNode.getNextNode();
 			lengthOfList--;
 		}
 		if (indexOfIntegerToBeRemoved == lengthOfList) {
 			endNode.getPreviousNode().setNextNode(startNode);
 			startNode.setPreviousNode(endNode.getPreviousNode());
+			endNode = endNode.getPreviousNode();
 			lengthOfList--;
 		}
 		else {
@@ -63,6 +63,7 @@ public class DoublyLinkedListImpl implements DoublyLinkedList {
 				}
 				node = node.getNextNode();
 			}
+			lengthOfList--;
 		}
 	}
 	

@@ -2,7 +2,9 @@ package test.java.javaspecific;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,14 +25,29 @@ public class TestDoublyLinkedList {
 	public static void setUpBeforeClass() throws Exception {
 		node = new NodeImpl(1);
 		list = new DoublyLinkedListImpl(node);
-		
-		startNode = new NodeImpl(1);
-		longerList = new DoublyLinkedListImpl(startNode);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		node = null;
+		list = null;
 		
+		longerList = null;
+		startNode = null;
+	}
+	
+	@Before
+	public void buildUp() {
+		startNode = new NodeImpl(1);
+		longerList = new DoublyLinkedListImpl(startNode);
+		
+		longerList.addNodeToEndOfList(2);
+		longerList.addNodeToEndOfList(3);
+	}
+	@After
+	public void tearDown() {
+		startNode = null;
+		longerList = null;
 	}
 
 	@Test
@@ -48,13 +65,29 @@ public class TestDoublyLinkedList {
 	}
 	
 	@Test
-	public void testRemoveNodeFromList() {
-		longerList.addNodeToEndOfList(2);
-		longerList.addNodeToEndOfList(3);
+	public void testRemoveNodeFromStartOfList() {
+		longerList.removeNodeFromList(0);
 		
+		int startNodeInt = longerList.getStartNode().getIntegerContainedInNode();
+		
+		assertEquals(2, startNodeInt);
+	}
+	
+	@Test
+	public void testRemoveNodeFromEndOfList() {
+		longerList.removeNodeFromList(2);
+		
+		int endNodeInt = longerList.getEndNode().getIntegerContainedInNode();
+		
+		assertEquals(2, endNodeInt);
+	}
+	
+	@Test
+	public void testRemoveNodeFromMiddleOfList() {
 		longerList.removeNodeFromList(1);
 		
-		System.out.println(longerList.getStartNode().getIntegerContainedInNode());
-		System.out.println(longerList.getEndNode().getIntegerContainedInNode());
+		int endNodeInt = 3;
+		
+		assertEquals(3, endNodeInt);
 	}
 }
