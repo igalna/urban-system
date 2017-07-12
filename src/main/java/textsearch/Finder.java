@@ -3,9 +3,7 @@ package main.java.textsearch;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,17 +11,14 @@ public class Finder {
 
 	public void processInputFile(String fileName, String[] searchTerms) {
 		
-		List<String> list = new ArrayList<>();
-		
 		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-			list = stream.filter(line -> streamContains(line, searchTerms))
+			stream.filter(line -> streamContains(line, searchTerms))
 					.map(line -> getFristTwoElements(line))
-					.collect(Collectors.toList());
+					.collect(Collectors.toList())
+					.forEach(System.out::println);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for (String result : list)
-			System.out.println(result);
 	}
 	
 	private boolean streamContains(String string, String[] searchTerms) {
