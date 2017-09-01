@@ -41,4 +41,24 @@ public class Fibonacci {
 		return list.parallelStream()
 				   .reduce(BigInteger.ZERO, BigInteger::add);
 	}
+	
+	public static int iterativeFibonacci(int n) {
+		
+		if (n == 0)
+			return 0;
+		if (n == 1)
+			return 1;
+		
+		int previousPrevious = 0;
+		int previous = 1;
+		int result = 0;
+		
+		for (int i = 2; i <= n; i++) {
+			result = previousPrevious + previous;
+			previousPrevious = previous;
+			previous = result;
+			System.out.println(result);
+		}
+		return result;
+	}
 }

@@ -34,4 +34,11 @@ public class TestFibonacci {
 		
 		assertEquals(sum, sumOfList);
 	}
+	
+	@Test
+	public void testIterativeFibonacci() {
+		int fib = Fibonacci.iterativeFibonacci(20);
+		System.out.println("fibonacci with n=20 should be " + fib);
+		assertEquals(6765, fib);
+	}
 }
